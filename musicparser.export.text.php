@@ -41,7 +41,8 @@ namespace MusicParser\Export\Text{
 								$chords = "";
 								
 								if($firstline){
-										$text .= str_pad($el->label.$el->delimiter,SONGPART_MARGIN," ",STR_PAD_LEFT)." ";
+										$text .= str_repeat(" ",SONGPART_MARGIN - mb_strlen($el->label.$el->delimiter));
+										$text .= $el->label.$el->delimiter." ";
 										$firstline = false;
 								}else{
 										$text .= str_repeat(" ",SONGPART_MARGIN)." ";
