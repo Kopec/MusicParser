@@ -1,3 +1,6 @@
+DEPRECATED: THIS IS AN OLD PHP VERSION, FOR THE NEW JS VERSION SWITCH TO BRANCH MASTER
+=============================
+
 MusicParser
 ===========
 
