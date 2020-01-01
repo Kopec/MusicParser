@@ -1,23 +1,24 @@
 import { SongPart } from "../schema";
-import { Chord } from "./chord";
+import { ChordGroup } from "./chordgroup";
 import { TextPart } from "./textpart";
 import { Diagram } from "./diagram";
 
-export class Text implements SongPart {
+export class Text extends SongPart {
 
   re_chord = /\[[^\[\]\n]+?\]/;
-  re_diagram = /\[\[[^ ]+ \d{6}\]\]/;
+  re_diagram = /\[\[[^ ]+ (?:[\dx]{6}|(?:\d\d|xx){6})\]\]/;
 
-  children: SongPart[] = [];
+  children: (TextPart | ChordGroup | Diagram)[] = [];
 
-  constructor(public source: string) {
+  constructor(source: string) {
+    super(source);
 
     this.children = this.parseText(source);
   }
 
-  parseText(source: string): SongPart[] {
+  parseText(source: string): (TextPart | ChordGroup | Diagram)[] {
 
-    const children: SongPart[] = [];
+    const children: (TextPart | ChordGroup | Diagram)[] = [];
 
     const regexps = [this.re_chord, this.re_diagram];
     const regexpMerged = new RegExp(`(?:${regexps.map(reg => `(${reg.source})`).join("|")})`, "gm");
@@ -29,10 +30,11 @@ export class Text implements SongPart {
       const [partSource, chord, diagram] = match;
 
       // preceding text
-      if (source.substring(lastIndex, match.index)) children.push(new TextPart(source.substring(lastIndex, match.index)));
+      const preText = source.substring(lastIndex, match.index);
+      if (preText) children.push(new TextPart(preText));
 
       // current token
-      if (chord) children.push(new Chord(partSource));
+      if (chord) children.push(new ChordGroup(partSource));
       if (diagram) children.push(new Diagram(partSource));
 
       lastIndex = match.index + partSource.length;
@@ -44,6 +46,9 @@ export class Text implements SongPart {
     return children;
   }
 
+  getName() {
+    return `Text (Source: ${this.source.substr(0, 20)})`;
+  }
 
   getChildren() {
     return this.children;

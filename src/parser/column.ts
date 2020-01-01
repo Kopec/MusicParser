@@ -1,13 +1,14 @@
 import { SongPart } from "../schema";
 import { Verse } from "./verse";
 
-export class Column implements SongPart {
+export class Column extends SongPart {
 
-  re_verse = /^(?:(?:(\d+|#)\.|(\w+)\:)(?:\n|))/m;
+  re_verse = /^(?:(?:(\d+|#)(\.)|(\w+)(\:))(?:\n|))/m;
 
   verses: Verse[];
 
-  constructor(public source: string) {
+  constructor(source: string) {
+    super(source);
     const sourceParts = source.trim().split(this.re_verse);
 
     this.verses = this.createVerses(sourceParts);
@@ -18,15 +19,20 @@ export class Column implements SongPart {
 
     if (sourceParts.length) {
       const source = <string>sourceParts.shift(); // cannot be undefined is length > 0
-      if (source.trim().length > 0) verses.push(new Verse(source, null));
+      if (source.trim().length > 0) verses.push(new Verse(source, null, null));
     }
 
     while (sourceParts.length) {
-      const [label1, label2, source] = sourceParts.splice(0, 3);
-      verses.push(new Verse(source, label1 || label2));
+      const [label1, separator1, label2, separator2, source] = sourceParts.splice(0, 5);
+      verses.push(new Verse(source, label1 || label2, separator1 || separator2));
     }
 
     return verses;
+  }
+
+
+  getName() {
+    return "Column";
   }
 
   getChildren() {

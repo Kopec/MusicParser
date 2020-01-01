@@ -1,8 +1,13 @@
 import { SongPart } from "../schema";
 
-export class TextPart implements SongPart {
+export class TextPart extends SongPart {
 
-  constructor(public source:string){
+  constructor(source: string) {
+    super(source)
+  }
+
+  getName() {
+    return `TextPart (Source: ${this.source.substr(0, 20)})`;
   }
 
   getChildren() {

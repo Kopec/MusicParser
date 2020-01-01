@@ -1,5 +1,5 @@
-import { SongPart } from "./songpart";
+import { Song } from "../parser/song";
 
 export interface Exporter {
-  export(song: SongPart): any;
+  export(song: Song): any;
 }

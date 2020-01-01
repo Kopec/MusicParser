@@ -1,6 +1,11 @@
 import { Song } from "./parser/song";
 import { StructureExporter } from "./exporters/structure";
 import { DebugExporter } from "./exporters/debug";
+import { HtmlExporter } from "./exporters/html";
+import { Tab } from "./parser/tab";
+import { Diagram } from "./parser/diagram";
+import { writeFile } from "fs";
+import path from "path";
 
 const song = new Song(`
 Intro:
@@ -62,8 +67,9 @@ R: You got me on my knees Layla... (2x)
 [[C 032010]]
 `);
 
-const exporter = new DebugExporter();
+const exporter = new HtmlExporter();
 
+song.transpose(8);
 const string = exporter.export(song);
 
-console.log(string);
+writeFile(path.join(__dirname,"../../","test.html"),string, () => console.log("written"));
