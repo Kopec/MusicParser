@@ -1,7 +1,7 @@
 import { Exporter } from "../schema";
 
 import { createDiagram } from "./html/createDiagram";
-import { Song, Section, Column, Verse, Tab, Text, TextPart, ChordGroup, Diagram, Chord } from "../parser";
+import { Song, Section, Column, Verse, Tab, Text, TextPart, ChordGroup, Diagram, Chord } from "../structure";
 
 export class HtmlExporter implements Exporter {
 
