@@ -1,0 +1,35 @@
+{
+  "name": "@smallhillcz/musicparser",
+  "version": "2.0.1",
+  "description": "MusicParser",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "prepublish": "tsc && npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SmallhillCZ/MusicParser.git"
+  },
+  "keywords": [
+    "music",
+    "chords",
+    "tabs",
+    "notes",
+    "parser"
+  ],
+  "author": "Martin Kopeček <martin.kopecek@smallhill.cz>",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/SmallhillCZ/MusicParser/issues"
+  },
+  "homepage": "https://github.com/SmallhillCZ/MusicParser#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.25",
+    "@types/node": "^13.1.1",
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.2",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.4"
+  }
+}

@@ -1,9 +1,7 @@
 MusicParser
 ===========
 
-A PHP Class to parse and display songswith embedded chords and tabulatures.
-
-For the syntax see Export->Kód on the page of any song on http://zpevniky.smallhill.cz/
+A parser of music lyrics with chords and tabulatures.
 
 Features
 -------
