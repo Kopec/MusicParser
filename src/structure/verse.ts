@@ -16,7 +16,7 @@ export class Verse extends SongPart {
     super(source);
 
     this.children = this.source
-      .split(/\n\n/)
+      .split(/\n\s*\n/)
       .map(blockSource => blockSource.trim())
       .filter(blockSource => blockSource.length > 0)
       .map(blockSource => {
