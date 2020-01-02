@@ -1,23 +1,24 @@
 import { SongPart } from "../schema";
 import { tone2index, index2tone } from "../util/transpose";
+import { normalizeChord } from "../util/normalize-chord";
 
 export class Chord extends SongPart {
 
-  re_tone = /^([A-H])(#|b)?/i;
+  re_tone = /^[A-H][♯♭]?/i;
 
   chord: string;
 
   constructor(source: string) {
     super(source);
 
-    this.chord = source;
+    this.chord = normalizeChord(source);
 
   }
 
   getTone() {
-    const matches = this.re_tone.exec(this.chord);
+    const matches = this.chord.match(this.re_tone);
 
-    return matches ? matches[1].toUpperCase() + (matches[2] || "").toLowerCase() : null;
+    return matches ? matches[0] : null;
   }
 
   setTone(newTone: string) {
