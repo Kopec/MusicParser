@@ -1,6 +1,6 @@
 module.exports = {
   transform: { '^.+\\.ts?$': 'ts-jest' },
   testEnvironment: 'node',
-  testRegex: '/test/.*\\.(test|spec)?\\.(ts|tsx)$',
+  testRegex: '/tests/.*\\.ts$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node']
 };
